@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northpole Education - Homestay Calculator</title>
+    <style>
+        :root {
+            --primary: #ffbf00;
+            --secondary: #ffd866;
+            --light: #fff9e6;
+            --dark: #333333;
+            --accent: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-text {
+            margin-left: 10px;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        
+        header p {
+            margin: 5px 0 0;
+            opacity: 0.9;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .checkbox-group {
+            margin-top: 10px;
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-container input {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .checkbox-container label {
+            margin: 0;
+            font-weight: normal;
+        }
+        
+        button {
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #e6ac00;
+        }
+        
+        .summary {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .summary h3 {
+            margin-top: 0;
+            color: var(--dark);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .summary-total {
+            font-weight: 700;
+            font-size: 18px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid var(--secondary);
+        }
+        
+        .disclaimer {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+            margin-top: 20px;
+        }
+        
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .star {
+            color: var(--primary);
+            font-size: 28px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span class="star">★</span>
+            <div class="logo-text">
+                <h1>Northpole Education</h1>
+                <p>Homestay Quote Calculator</p>
+            </div>
+        </div>
+        <div>
+            <p>2025 Pricing</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="two-columns">
+            <div>
+                <div class="form-group">
+                    <label for="ageGroup">Age Group:</label>
+                    <select id="ageGroup">
+                        <option value="adult">Adult (19+)</option>
+                        <option value="minor">Minor (18 or younger)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mealPlan">Meal Plan:</label>
+                    <select id="mealPlan">
+                        <option value="two">2 Meals per day</option>
+                        <option value="three">3 Meals per day</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="checkInDate">Check-in Date:</label>
+                    <input type="date" id="checkInDate">
+                </div>
+                
+                <div class="form-group">
+                    <label for="checkOutDate">Check-out Date:</label>
+                    <input type="date" id="checkOutDate">
+                    <small>Minimum 7 nights stay</small>
+                </div>
+            </div>
+            
+            <div>
+                <div class="form-group">
+                    <label for="airportTransfer">Airport Transfer:</label>
+                    <select id="airportTransfer">
+                        <option value="none">No Airport Transfer</option>
+                        <option value="oneWay">One Way ($135)</option>
+                        <option value="twoWays">Two Ways ($270)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Additional Services:</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="custodianship">
+                            <label for="custodianship">Notarized Custodianship ($300)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="calculateTotal()">Calculate Total</button>
+        
+        <div class="summary" id="quoteSummary" style="display: none;">
+            <h3>Quote Summary</h3>
+            <div id="summaryContent">
+                <!-- This will be populated by JavaScript -->
+            </div>
+            <p class="disclaimer">* All prices in CAD.</p>
+            <p class="disclaimer">* High season (Jun 15, 2025 - Sep 15, 2025) has additional fees.</p>
+            <p class="disclaimer">* Note: All prices and fees are subject to change without notice.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Homestay base pricing data
+        const homestayPrices = {
+            adult: {
+                two: 300,   // 2 meals
+                three: 330  // 3 meals
+            },
+            minor: {
+                two: 330,   // 2 meals (base + $30)
+                three: 360  // 3 meals (base + $30)
+            }
+        };
+        
+        // Extra night pricing
+        const extraNightPrices = {
+            adult: {
+                two: 50,    // 2 meals
+                three: 55   // 3 meals
+            },
+            minor: {
+                two: 55,    // 2 meals
+                three: 60   // 3 meals
+            }
+        };
+        
+        // Fixed fees
+        const placementFee = 350;
+        const airportTransferFee = 135;
+        const custodianshipFee = 300;
+        const highSeasonFee = 30;  // per week
+        
+        // Format date for display using a direct string approach
+        function formatDateDisplay(dateStr) {
+            if (!dateStr) return "";
+            
+            const [year, month, day] = dateStr.split('-').map(Number);
+            const months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            return `${months[month-1]} ${day}, ${year}`;
+        }
+        
+        // Calculate days between two date strings (YYYY-MM-DD format)
+        function calculateDaysBetween(startDateStr, endDateStr) {
+            if (!startDateStr || !endDateStr) return 0;
+            
+            // Manually create Date objects with noon time to avoid timezone issues
+            const [startYear, startMonth, startDay] = startDateStr.split('-').map(Number);
+            const [endYear, endMonth, endDay] = endDateStr.split('-').map(Number);
+            
+            const start = new Date(startYear, startMonth-1, startDay, 12, 0, 0);
+            const end = new Date(endYear, endMonth-1, endDay, 12, 0, 0);
+            
+            // Calculate difference in days
+            const diffTime = end - start;
+            return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        }
+        
+        // Check if a date string is in high season
+        function isInHighSeason(dateStr) {
+            if (!dateStr) return false;
+            
+            const [year, month, day] = dateStr.split('-').map(Number);
+            
+            // High season: June 15 to September 15
+            if (month < 6 || month > 9) return false;
+            if (month === 6 && day < 15) return false;
+            if (month === 9 && day > 15) return false;
+            
+            return true;
+        }
+        
+        // Calculate high season days between two date strings
+        function calculateHighSeasonDays(startDateStr, endDateStr) {
+            if (!startDateStr || !endDateStr) return 0;
+            
+            let highSeasonDays = 0;
+            
+            // Create Date objects for iteration
+            const [startYear, startMonth, startDay] = startDateStr.split('-').map(Number);
+            const start = new Date(startYear, startMonth-1, startDay, 12, 0, 0);
+            
+            const [endYear, endMonth, endDay] = endDateStr.split('-').map(Number);
+            const end = new Date(endYear, endMonth-1, endDay, 12, 0, 0);
+            
+            // Iterate through each day and check if it's in high season
+            const current = new Date(start);
+            while (current < end) {
+                const currentDateStr = `${current.getFullYear()}-${(current.getMonth()+1).toString().padStart(2, '0')}-${current.getDate().toString().padStart(2, '0')}`;
+                
+                if (isInHighSeason(currentDateStr)) {
+                    highSeasonDays++;
+                }
+                
+                current.setDate(current.getDate() + 1);
+            }
+            
+            return highSeasonDays;
+        }
+        
+        // Set default dates
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const checkOutDate = new Date(today);
+            checkOutDate.setDate(today.getDate() + 28); // Default 4 weeks stay
+            
+            // Format dates properly for the date inputs
+            const formatDateForInput = (date) => {
+                const year = date.getFullYear();
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const day = date.getDate().toString().padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+            
+            document.getElementById('checkInDate').value = formatDateForInput(today);
+            document.getElementById('checkOutDate').value = formatDateForInput(checkOutDate);
+            
+            // Add event listeners
+            document.getElementById('checkInDate').addEventListener('change', validateDates);
+            document.getElementById('checkOutDate').addEventListener('change', validateDates);
+        });
+        
+        function validateDates() {
+            const checkInDateStr = document.getElementById('checkInDate').value;
+            const checkOutDateStr = document.getElementById('checkOutDate').value;
+            
+            if (!checkInDateStr || !checkOutDateStr) return;
+            
+            // Calculate the difference in days
+            const days = calculateDaysBetween(checkInDateStr, checkOutDateStr);
+            
+            // Validate dates
+            if (days <= 0) {
+                alert("Check-out date must be after check-in date");
+                document.getElementById('checkOutDate').value = '';
+                return;
+            }
+            
+            // Ensure minimum 1 week stay
+            if (days < 7) {
+                alert("Minimum stay is 1 week (7 nights)");
+                
+                // Calculate a new check-out date (7 days from check-in)
+                const [year, month, day] = checkInDateStr.split('-').map(Number);
+                const newCheckOut = new Date(year, month-1, day, 12, 0, 0);
+                newCheckOut.setDate(newCheckOut.getDate() + 7);
+                
+                // Format for the input field
+                const newMonth = (newCheckOut.getMonth() + 1).toString().padStart(2, '0');
+                const newDay = newCheckOut.getDate().toString().padStart(2, '0');
+                document.getElementById('checkOutDate').value = `${newCheckOut.getFullYear()}-${newMonth}-${newDay}`;
+            }
+        }
+        
+        function calculateTotal() {
+            const ageGroup = document.getElementById('ageGroup').value;
+            const mealPlan = document.getElementById('mealPlan').value;
+            const checkInDateStr = document.getElementById('checkInDate').value;
+            const checkOutDateStr = document.getElementById('checkOutDate').value;
+            const airportTransferOption = document.getElementById('airportTransfer').value;
+            const custodianshipSelected = document.getElementById('custodianship').checked;
+            
+            if (!checkInDateStr || !checkOutDateStr) {
+                alert("Please select both check-in and check-out dates");
+                return;
+            }
+            
+            // Calculate total days
+            const totalDays = calculateDaysBetween(checkInDateStr, checkOutDateStr);
+            
+            if (totalDays <= 0) {
+                alert("Check-out date must be after check-in date");
+                return;
+            }
+            
+            if (totalDays < 7) {
+                alert("Minimum stay is 7 nights");
+                return;
+            }
+            
+            // Calculate complete weeks and remaining nights
+            const weeks = Math.floor(totalDays / 7);
+            const extraNights = totalDays % 7;
+            
+            // Calculate high season days
+            const highSeasonDays = calculateHighSeasonDays(checkInDateStr, checkOutDateStr);
+            const highSeasonWeeksForBilling = Math.ceil(highSeasonDays / 7);
+            
+            // Calculate homestay cost
+            const weeklyCost = homestayPrices[ageGroup][mealPlan];
+            const homestayBaseCost = weeklyCost * weeks;
+            
+            // Calculate extra nights cost
+            const extraNightCost = extraNightPrices[ageGroup][mealPlan] * extraNights;
+            
+            // Calculate high season fee if applicable
+            const highSeasonCost = highSeasonFee * highSeasonWeeksForBilling;
+            
+            // Calculate additional services
+            const placementCost = placementFee; // Always included
+            
+            let airportCost = 0;
+            if (airportTransferOption === "oneWay") {
+                airportCost = airportTransferFee;
+            } else if (airportTransferOption === "twoWays") {
+                airportCost = airportTransferFee * 2;
+            }
+            
+            const custodianshipCost = custodianshipSelected ? custodianshipFee : 0;
+            
+            // Calculate total
+            const totalCost = homestayBaseCost + extraNightCost + highSeasonCost + placementCost + airportCost + custodianshipCost;
+            
+            // Format dates for display using our direct string method
+            const formattedCheckInDate = formatDateDisplay(checkInDateStr);
+            const formattedCheckOutDate = formatDateDisplay(checkOutDateStr);
+            
+            // Display summary
+            let mealPlanName = mealPlan === 'two' ? '2 Meals per day' : '3 Meals per day';
+            let ageGroupName = ageGroup === 'adult' ? 'Adult (19+)' : 'Minor (18 or younger)';
+            
+            let summaryHTML = `
+                <div class="summary-item">
+                    <span>Stay Period:</span>
+                    <span>${formattedCheckInDate} to ${formattedCheckOutDate} (${totalDays} nights)</span>
+                </div>
+                <div class="summary-item">
+                    <span>Student Type:</span>
+                    <span>${ageGroupName}</span>
+                </div>
+                <div class="summary-item">
+                    <span>Meal Plan:</span>
+                    <span>${mealPlanName}</span>
+                </div>
+                <div class="summary-item">
+                    <span>Placement Fee:</span>
+                    <span>${placementFee.toFixed(2)}</span>
+                </div>
+            `;
+            
+            if (weeks > 0) {
+                summaryHTML += `
+                    <div class="summary-item">
+                        <span>Homestay Fee (${weeks} ${weeks === 1 ? 'week' : 'weeks'}):</span>
+                        <span>${weeklyCost.toFixed(2)} × ${weeks} = ${homestayBaseCost.toFixed(2)}</span>
+                    </div>
+                `;
+            }
+            
+            if (extraNights > 0) {
+                summaryHTML += `
+                    <div class="summary-item">
+                        <span>Extra Nights (${extraNights} ${extraNights === 1 ? 'night' : 'nights'}):</span>
+                        <span>${extraNightPrices[ageGroup][mealPlan].toFixed(2)} × ${extraNights} = ${extraNightCost.toFixed(2)}</span>
+                    </div>
+                `;
+            }
+            
+            if (highSeasonWeeksForBilling > 0) {
+                summaryHTML += `
+                    <div class="summary-item">
+                        <span>High Season Fee:</span>
+                        <span>$${highSeasonFee.toFixed(2)} × ${highSeasonWeeksForBilling} weeks = $${highSeasonCost.toFixed(2)}</span>
+                    </div>
+                `;
+            }
+            
+            if (airportTransferOption === "oneWay") {
+                summaryHTML += `
+                    <div class="summary-item">
+                        <span>Airport Transfer (One Way):</span>
+                        <span>${airportTransferFee.toFixed(2)}</span>
+                    </div>
+                `;
+            } else if (airportTransferOption === "twoWays") {
+                summaryHTML += `
+                    <div class="summary-item">
+                        <span>Airport Transfer (Two Ways):</span>
+                        <span>${(airportTransferFee * 2).toFixed(2)}</span>
+                    </div>
+                `;
+            }
+            
+            if (custodianshipSelected) {
+                summaryHTML += `
+                    <div class="summary-item">
+                        <span>Notarized Custodianship:</span>
+                        <span>$${custodianshipFee.toFixed(2)}</span>
+                    </div>
+                `;
+            }
+            
+            summaryHTML += `
+                <div class="summary-item summary-total">
+                    <span>Total Cost:</span>
+                    <span>$${totalCost.toFixed(2)}</span>
+                </div>
+            `;
+            
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+            document.getElementById('quoteSummary').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
